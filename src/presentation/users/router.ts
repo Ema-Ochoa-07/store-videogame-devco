@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { UsersController } from "./controller";
+import { UserService } from "../services/user.service";
 
 export class UsersRoutes{
     static get routes(): Router{
         const router = Router()
 
-        const constroller = new UsersController
+        const userService = new UserService
+        const constroller = new UsersController(userService)
 
         router.get('/', constroller.findAllUsers)
         router.post('/', constroller.createUsers)
