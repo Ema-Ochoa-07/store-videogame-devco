@@ -24,10 +24,10 @@ export class Videogame extends BaseEntity{
     console: string
 
     @Column({
-        type: 'varchar',
+        type: 'int',
         nullable: false,
     })
-    quantity: string
+    quantity: number
     
 
     @CreateDateColumn()
