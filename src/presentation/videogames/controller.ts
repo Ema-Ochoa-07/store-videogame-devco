@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { VideogameService } from "../services/videogame.service"
+import { error } from "console"
 
 export class VideogamesController{
 
@@ -11,11 +12,11 @@ export class VideogamesController{
   
    createVideogames = (req:Request, res: Response) => {
        
-      const { name, console, quantity } = req.body
+      const { name, console, quantity, userId } = req.body
 
-      this.videogameService.createVideogame({name, console, quantity})
-      .then((videgame) => {
-          res.status(201).json(videgame)
+      this.videogameService.createVideogame({name, console, quantity, userId})
+      .then((videogame) => {
+          res.status(201).json(videogame)
       })
       .catch((error) => {
           res.status(500).json(error)
@@ -23,13 +24,19 @@ export class VideogamesController{
   }
 
    
+   
    findAllVideogames = (req: Request, res: Response) => {
     res.status(200).json({message: 'ok'})
    }
 
 
    findOneVideogames = (req: Request, res: Response) => {
-
+    
+    const { id } = req.params
+    
+    this.videogameService.findOneVideogame(+id)
+        .then(videogame => res.status(200).json(videogame))
+        .catch(error => res.status(500).json(error))
    }
 
 

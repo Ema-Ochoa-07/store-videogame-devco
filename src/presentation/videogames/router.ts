@@ -7,13 +7,13 @@ export class VidegamesRoutes{
         const router = Router()
 
         const videogameService = new VideogameService
-        const controller = new VideogamesController(videogameService)
+        const videogameController = new VideogamesController(videogameService)
 
-        router.get('/', controller.findAllVideogames)
-        router.post('/', controller.createVideogames)
-        router.get('/:id', controller.findOneVideogames)
-        router.patch('/:id', controller.updateVideogames)
-        router.delete('/:id', controller.updateVideogames)
+        router.get('/', videogameController.findAllVideogames)
+        router.post('/', videogameController.createVideogames)
+        router.get('/:id', videogameController.findOneVideogames)
+        router.patch('/:id', videogameController.updateVideogames)
+        router.delete('/:id', videogameController.updateVideogames)
 
         return router
     }

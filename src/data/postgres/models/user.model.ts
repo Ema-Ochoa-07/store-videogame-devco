@@ -1,6 +1,7 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Videogame } from "./videogame.model";
 
-enum UserStatus{
+export enum UserStatus{
     ACTIVE = 'ACTIVE',
     DISABLED = 'DISABLED'
 }
@@ -12,25 +13,24 @@ export class User extends BaseEntity{
     id: number
 
 
-    @Column({
-        type: 'varchar',
+    @Column('varchar', {
+        length: 150,
         nullable: false,
-        length: 150
+        unique: true,
     })
     name: string
 
 
-    @Column({
-        type: 'varchar',
+    @Column('varchar', {
+        length: 150,
         nullable: false,
-        length: 150
-    })
+        unique: true,
+      })
     lastname: string
 
 
-    @Column({
+    @Column('enum',{
         enum: UserStatus,
-        nullable: false,
         default: UserStatus.ACTIVE
     })
     status: UserStatus
@@ -41,4 +41,9 @@ export class User extends BaseEntity{
 
     @UpdateDateColumn()
     updated_at: Date
+
+
+    // relations
+    @OneToMany(() => Videogame, (videogame) => videogame.user)
+    videogames: Videogame[];
 }
