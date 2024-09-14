@@ -28,6 +28,11 @@ export class UsersController{
 
     findOneUsers = (req:Request, res: Response) => {
         
+        const { id } = req.params;    
+        this.userService.findOneUser(+id)
+        
+          .then(user => res.status(200).json(user))
+          .catch(error => res.status(500).json(error))
     }
 
 

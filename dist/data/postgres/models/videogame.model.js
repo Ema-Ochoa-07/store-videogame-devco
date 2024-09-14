@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Videogame = void 0;
 const typeorm_1 = require("typeorm");
+const user_model_1 = require("./user.model");
 let Videogame = class Videogame extends typeorm_1.BaseEntity {
 };
 exports.Videogame = Videogame;
@@ -29,26 +30,38 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)('varchar', {
         length: 150,
-        nullable: false,
-        unique: true,
+        nullable: false
     }),
     __metadata("design:type", String)
 ], Videogame.prototype, "console", void 0);
 __decorate([
-    (0, typeorm_1.Column)('int', {
+    (0, typeorm_1.Column)({
         nullable: false,
-        default: 0,
+        type: 'int'
     }),
     __metadata("design:type", Number)
 ], Videogame.prototype, "quantity", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'int',
+        nullable: false
+    }),
+    __metadata("design:type", Number)
+], Videogame.prototype, "user_id", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Videogame.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", Date
+    // relations
+    )
 ], Videogame.prototype, "updated_at", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.videogames),
+    __metadata("design:type", user_model_1.User)
+], Videogame.prototype, "user", void 0);
 exports.Videogame = Videogame = __decorate([
     (0, typeorm_1.Entity)()
 ], Videogame);

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = exports.UserStatus = void 0;
 const typeorm_1 = require("typeorm");
+const videogame_model_1 = require("./videogame.model");
 var UserStatus;
 (function (UserStatus) {
     UserStatus["ACTIVE"] = "ACTIVE";
@@ -52,8 +53,14 @@ __decorate([
 ], User.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", Date
+    // relations
+    )
 ], User.prototype, "updated_at", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => videogame_model_1.Videogame, (videogame) => videogame.user),
+    __metadata("design:type", Array)
+], User.prototype, "videogames", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

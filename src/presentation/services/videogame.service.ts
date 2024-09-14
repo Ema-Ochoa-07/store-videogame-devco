@@ -1,19 +1,24 @@
 import { error } from "console";
 import { Videogame } from "../../data";
+import { UserService } from "./user.service";
 
 
 export class VideogameService{
 
+    constructor(
+        private readonly userService: UserService
+    ){}
+
     async createVideogame(videogameData: any){
 
-        // Validar que exista videogame
-
-        const videogame = new Videogame()
         
+        const videogame = new Videogame()        
+
         videogame.name = videogameData.name.toLowerCase().trim()
         videogame.console = videogameData.console.toLowerCase().trim()
-        videogame.quantity = videogameData.quantity
-        videogame.user_id = videogameData.userId        
+        videogame.quantity = videogameData.quantity   
+        videogame.user = videogameData.userId    
+        // videogame.user = user         
 
         try {
             return await videogame.save()
@@ -26,14 +31,11 @@ export class VideogameService{
         const videogame = await Videogame.findOne({
             where:{
                 id: id
-            }, relations: ['user'],
-            select:{
-                id: true,
-                name: true
             }
         })
-        
-        if(!videogame) throw new Error("No existe el video juego")
+
+        if(!videogame) throw new Error("Video juego no encontrado")
             return videogame
     }
-}
+
+}           

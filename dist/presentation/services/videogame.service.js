@@ -12,19 +12,52 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.VideogameService = void 0;
 const data_1 = require("../../data");
 class VideogameService {
+    constructor(userService) {
+        this.userService = userService;
+    }
     createVideogame(videogameData) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Validar que exista videogame
+            // Validar que exista al menos 1 usuario con quien vincularlo        
+            const userPromise = this.userService.findOneUser(videogameData.userId);
+            // verificar que no exista un videojuego con el mismo nombre
+            const videogamePromise = this.findOneVideogameByName(videogameData.name);
+            const [user, name] = yield Promise.all([userPromise, videogamePromise]);
             const videogame = new data_1.Videogame();
             videogame.name = videogameData.name.toLowerCase().trim();
             videogame.console = videogameData.console.toLowerCase().trim();
-            videogame.quantity = videogameData.quantity.trim();
+            videogame.quantity = videogameData.quantity;
+            videogame.user_id = videogameData.userId;
+            // videogame.user = user         
             try {
                 return yield videogame.save();
             }
             catch (error) {
                 console.log(error);
             }
+        });
+    }
+    findOneVideogame(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const videogame = yield data_1.Videogame.findOne({
+                where: {
+                    id: id
+                }
+            });
+            if (!videogame)
+                throw new Error("Video juego no encontrado");
+            return videogame;
+        });
+    }
+    findOneVideogameByName(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const videogame = yield data_1.Videogame.findOne({
+                where: {
+                    name: name
+                }
+            });
+            if (!videogame)
+                throw new Error("Este nombre de video juego ya existe");
+            return videogame;
         });
     }
 }

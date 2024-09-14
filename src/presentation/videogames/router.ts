@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { VideogamesController } from "./controller";
 import { VideogameService } from "../services/videogame.service";
+import { UserService } from "../services/user.service";
 
 export class VidegamesRoutes{
     static get routes(): Router{
         const router = Router()
 
-        const videogameService = new VideogameService
+        const userService = new  UserService()
+        const videogameService = new VideogameService(userService)
         const videogameController = new VideogamesController(videogameService)
 
         router.get('/', videogameController.findAllVideogames)

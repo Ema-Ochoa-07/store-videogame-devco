@@ -29,11 +29,11 @@ export class Videogame extends BaseEntity{
       })
       quantity: number;
 
-      @Column({
-        type: 'int',
-        nullable: false
-      })
-      user_id: number    
+      // @Column({
+      //   type: 'int',
+      //   nullable: false
+      // })
+      // user_id: number    
 
     @CreateDateColumn()
     created_at: Date    

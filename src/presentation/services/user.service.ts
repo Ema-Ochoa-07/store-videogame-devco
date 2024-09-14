@@ -17,6 +17,27 @@ export class UserService{
         } catch (error) {
             console.log(error)
         }
-
     }
+
+
+    async findOneUser(id:number){
+        const user = await User.findOne({
+            
+            where:{
+              id: id
+            }, 
+            select:{
+                videogames:{
+                  name: true
+                }            
+        },
+
+            relations:['videogames']
+        })
+            
+        if(!user) throw Error('Usuario no encontrado')
+        return user
+    }
+
+
 }

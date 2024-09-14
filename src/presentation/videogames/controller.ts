@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { VideogameService } from "../services/videogame.service"
-import { error } from "console"
 
 export class VideogamesController{
 

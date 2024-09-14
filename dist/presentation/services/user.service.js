@@ -26,5 +26,17 @@ class UserService {
             }
         });
     }
+    findOneUser(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield data_1.User.findOne({
+                where: {
+                    id: id
+                }, relations: ['videogame']
+            });
+            if (!user)
+                throw Error('Usuario no encontrado');
+            return user;
+        });
+    }
 }
 exports.UserService = UserService;

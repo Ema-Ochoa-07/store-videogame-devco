@@ -4,16 +4,18 @@ exports.VidegamesRoutes = void 0;
 const express_1 = require("express");
 const controller_1 = require("./controller");
 const videogame_service_1 = require("../services/videogame.service");
+const user_service_1 = require("../services/user.service");
 class VidegamesRoutes {
     static get routes() {
         const router = (0, express_1.Router)();
-        const videogameService = new videogame_service_1.VideogameService;
-        const controller = new controller_1.VideogamesController(videogameService);
-        router.get('/', controller.findAllVideogames);
-        router.post('/', controller.createVideogames);
-        router.get('/:id', controller.findOneVideogames);
-        router.patch('/:id', controller.updateVideogames);
-        router.delete('/:id', controller.updateVideogames);
+        const userService = new user_service_1.UserService();
+        const videogameService = new videogame_service_1.VideogameService(userService);
+        const videogameController = new controller_1.VideogamesController(videogameService);
+        router.get('/', videogameController.findAllVideogames);
+        router.post('/', videogameController.createVideogames);
+        router.get('/:id', videogameController.findOneVideogames);
+        router.patch('/:id', videogameController.updateVideogames);
+        router.delete('/:id', videogameController.updateVideogames);
         return router;
     }
 }
