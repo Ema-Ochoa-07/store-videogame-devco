@@ -17,16 +17,11 @@ class VideogameService {
     }
     createVideogame(videogameData) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Validar que exista al menos 1 usuario con quien vincularlo        
-            const userPromise = this.userService.findOneUser(videogameData.userId);
-            // verificar que no exista un videojuego con el mismo nombre
-            const videogamePromise = this.findOneVideogameByName(videogameData.name);
-            const [user, name] = yield Promise.all([userPromise, videogamePromise]);
             const videogame = new data_1.Videogame();
             videogame.name = videogameData.name.toLowerCase().trim();
             videogame.console = videogameData.console.toLowerCase().trim();
             videogame.quantity = videogameData.quantity;
-            videogame.user_id = videogameData.userId;
+            videogame.user = videogameData.userId;
             // videogame.user = user         
             try {
                 return yield videogame.save();
@@ -48,16 +43,14 @@ class VideogameService {
             return videogame;
         });
     }
-    findOneVideogameByName(name) {
+    findAllVideogames() {
         return __awaiter(this, void 0, void 0, function* () {
-            const videogame = yield data_1.Videogame.findOne({
-                where: {
-                    name: name
-                }
-            });
-            if (!videogame)
-                throw new Error("Este nombre de video juego ya existe");
-            return videogame;
+            try {
+                return yield data_1.Videogame.find({});
+            }
+            catch (error) {
+                throw new Error("Ups Error!, algo salió mal 🧨");
+            }
         });
     }
 }

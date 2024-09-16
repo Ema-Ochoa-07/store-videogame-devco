@@ -15,7 +15,9 @@ class VideogamesController {
             });
         };
         this.findAllVideogames = (req, res) => {
-            res.status(200).json({ message: 'ok' });
+            this.videogameService.findAllVideogames()
+                .then(videogames => res.status(200).json(videogames))
+                .catch(error => res.status(500).json(error));
         };
         this.findOneVideogames = (req, res) => {
             const { id } = req.params;

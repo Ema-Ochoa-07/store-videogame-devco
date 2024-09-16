@@ -42,13 +42,6 @@ __decorate([
     __metadata("design:type", Number)
 ], Videogame.prototype, "quantity", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'int',
-        nullable: false
-    }),
-    __metadata("design:type", Number)
-], Videogame.prototype, "user_id", void 0);
-__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Videogame.prototype, "created_at", void 0);
