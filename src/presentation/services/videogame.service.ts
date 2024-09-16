@@ -62,4 +62,15 @@ export class VideogameService{
         }
     }
 
+    async deleteVideogame(id: number){
+
+        const videogame = await this.findOneVideogame(id)
+        
+        try {
+            return videogame.remove()
+        } catch (error) {
+            throw new Error('Ups Error algo salió mal 🧨')
+        }
+    }
+
 }           

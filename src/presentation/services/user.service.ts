@@ -69,5 +69,18 @@ export class UserService{
         }
     }
 
+    async deleteUser(id:number){
+        
+        const user = await this.findOneUser(id)
+
+        user.status = UserStatus.DISABLED
+
+        try {
+            return user.save()
+        } catch (error) {
+            throw new Error('Ups Error algo salió mal 🧨')
+        }
+    }
+
 
 }

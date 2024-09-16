@@ -15,7 +15,7 @@ export class VidegamesRoutes{
         router.post('/', videogameController.createVideogames)
         router.get('/:id', videogameController.findOneVideogames)
         router.patch('/:id', videogameController.updateVideogames)
-        router.delete('/:id', videogameController.updateVideogames)
+        router.delete('/:id', videogameController.deleteVideogames)
 
         return router
     }

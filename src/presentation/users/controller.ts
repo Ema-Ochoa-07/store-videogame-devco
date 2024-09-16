@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { UserService } from "../services/user.service"
-import { error } from "console"
 
 
 export class UsersController{
@@ -61,6 +60,21 @@ export class UsersController{
 
     deleteUsers = (req:Request, res: Response) => {
         
+        const {id} = req.params
+        if (isNaN(+id)) {
+            return res.status(400).json({ message: 'El id debe ser un numero' })
+          }
+        
+        this.userService.deleteUser(+id)
+        
+        .then(user => {
+            return res.status(200).json(user)
+        })
+        .catch(error => {
+            return res.status(500).json(error)
+        })
+
+
     }
 
 }
