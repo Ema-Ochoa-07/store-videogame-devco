@@ -8,7 +8,7 @@ import { envs } from "./config/envs"
     main()
 })()
 
-async function main(){
+export async function main(){
 
     const postgres = new PostgresDatabase({
         host: envs.DB_HOST,
