@@ -28,6 +28,11 @@ export class User extends BaseEntity{
       })
     lastname: string
 
+    @Column('float', {
+        nullable: false
+    })
+    amount: number
+
 
     @Column('enum',{
         enum: UserStatus,

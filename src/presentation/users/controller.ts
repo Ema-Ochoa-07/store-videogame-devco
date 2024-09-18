@@ -10,9 +10,9 @@ export class UsersController{
 
     createUsers = (req:Request, res: Response) => {
        
-        const {name, lastname} = req.body
+        const {name, lastname, amount} = req.body
 
-        this.userService.createUser({name, lastname})
+        this.userService.createUser({name, lastname, amount})
         .then((user) => {
             return res.status(201).json(user)
         })
@@ -42,13 +42,13 @@ export class UsersController{
 
     updateUsers = (req:Request, res: Response) => {
         const { id } = req.params
-        const {name, lastname} = req.body
+        const {name, lastname, amount} = req.body
 
         if(isNaN(+id)){
             return res.status(400).json({message:'El id debe ser un número'})
         }
         
-        this.userService.updateUsers({name, lastname}, +id)
+        this.userService.updateUsers({name, lastname, amount}, +id)
         .then(user => {
             return res.status(200).json(user)
         })

@@ -73,4 +73,9 @@ export class VideogameService{
         }
     }
 
+
+    async sellVideogame(videogameData: any){    
+        
+    }
+
 }           

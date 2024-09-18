@@ -14,6 +14,7 @@ export class UserService{
         const user = new User()
         user.name = userData.name.toLowerCase().trim()
         user.lastname = userData.lastname.toLowerCase().trim()
+        user.amount = userData.amount
 
         try {
             return await user.save()
@@ -61,6 +62,7 @@ export class UserService{
 
         user.name = userData.name.toLowerCase().trim()
         user.lastname = userData.lastname.toLowerCase().trim()
+        user.amount = userData.amount
 
         try {
             return await user.save()    
