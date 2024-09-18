@@ -1,4 +1,4 @@
-import { Videogame } from "../../data";
+import { User, Videogame } from "../../data";
 import { UserService } from "./user.service";
 
 
@@ -15,7 +15,8 @@ export class VideogameService{
 
         videogame.name = videogameData.name.toLowerCase().trim()
         videogame.console = videogameData.console.toLowerCase().trim()
-        videogame.quantity = videogameData.quantity   
+        videogame.quantity = videogameData.quantity 
+        videogame.cost = videogameData.cost  
         videogame.user = videogameData.userId    
         // videogame.user = user         
 
@@ -54,6 +55,7 @@ export class VideogameService{
         videogame.name = videogameData.name.toLowerCase().trim()
         videogame.console = videogameData.console.toLowerCase().trim()
         videogame.quantity = videogameData.quantity
+        videogame.cost = videogameData.cost  
 
         try {
             return videogame.save()
@@ -75,7 +77,14 @@ export class VideogameService{
 
 
     async sellVideogame(videogameData: any){    
-        
+
+        const user = new User()
+        if(user.id === user.id){
+            throw new Error('Sender and Destination user cannot be equals the same')
+        }
+
+        const senderUserPromise = this.userService.findOneUser(videogameData)
+
     }
 
 }           

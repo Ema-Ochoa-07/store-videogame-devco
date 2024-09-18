@@ -12,9 +12,9 @@ export class VideogamesController{
   
    createVideogames = (req:Request, res: Response) => {
        
-      const { name, console, quantity, userId } = req.body
+      const { name, console, quantity, cost, userId } = req.body
 
-      this.videogameService.createVideogame({name, console, quantity, userId})
+      this.videogameService.createVideogame({name, console, quantity, cost, userId})
       .then((videogame) => {
           res.status(201).json(videogame)
       })
@@ -46,13 +46,13 @@ export class VideogamesController{
 
    updateVideogames = (req: Request, res: Response) => {
     const {id} = req.params
-    const {name, console, quantity} = req.body
+    const {name, console, quantity, cost} = req.body
 
     if(isNaN(+id)){
         return res.status(400).json({message:'El id debe ser un número'})
     }
 
-    this.videogameService.updateVideogames({name, console, quantity}, +id)
+    this.videogameService.updateVideogames({name, console, quantity, cost}, +id)
     .then(videogame => {
         return res.status(200).json(videogame)
     })

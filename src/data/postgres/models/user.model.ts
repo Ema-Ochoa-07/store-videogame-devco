@@ -27,6 +27,7 @@ export class User extends BaseEntity{
         unique: true,
       })
     lastname: string
+    
 
     @Column('float', {
         nullable: false
