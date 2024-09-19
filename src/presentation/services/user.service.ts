@@ -85,4 +85,38 @@ export class UserService{
     }
 
 
+    //Updates amount and quatity user
+
+
+    async updateAmount(id: number, amount:number){
+
+        const user = await this.findOneUser(id)
+        user.amount = amount
+
+        try {
+            return await user.save()    
+            // return {
+            //     ok: true
+            // }
+        } catch (error) {
+            throw new Error('Ups Error algo salió mal 🧨')
+        }
+    }
+
+    async updateQuantity(id: number, quantity:number){
+
+        const user = await this.findOneUser(id)
+        user.quantity = quantity
+
+        try {
+            return await user.save()    
+            // return {
+            //     ok: true
+            // }
+        } catch (error) {
+            throw new Error('Ups Error algo salió mal 🧨')
+        }
+    }
+
+
 }

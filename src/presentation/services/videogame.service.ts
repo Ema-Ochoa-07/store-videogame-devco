@@ -1,4 +1,5 @@
 import { User, Videogame } from "../../data";
+import { BuyVideogameDTO } from "../../domain/dtos/videogame/buyVideogame.dto";
 import { UserService } from "./user.service";
 
 
@@ -76,15 +77,38 @@ export class VideogameService{
     }
 
 
-    async sellVideogame(videogameData: any){    
+      //Updates amount and quatity videogame
 
-        const user = new User()
-        if(user.id === user.id){
-            throw new Error('Sender and Destination user cannot be equals the same')
+
+      async updateAmount(id: number, amount:number){
+
+        const videogame = await this.findOneVideogame(id)
+        videogame.amount = amount
+
+        try {
+            return await videogame.save()    
+            // return {
+            //     ok: true
+            // }
+        } catch (error) {
+            throw new Error('Ups Error algo salió mal 🧨')
         }
-
-        const senderUserPromise = this.userService.findOneUser(videogameData)
-
     }
+
+    async updateQuantity(id: number, quantity:number){
+
+        const videogame = await this.findOneVideogame(id)
+        videogame.quantity = quantity
+
+        try {
+            return await videogame.save()    
+            // return {
+            //     ok: true
+            // }
+        } catch (error) {
+            throw new Error('Ups Error algo salió mal 🧨')
+        }
+    }
+
 
 }           

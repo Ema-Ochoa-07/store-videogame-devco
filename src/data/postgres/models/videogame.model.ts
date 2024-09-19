@@ -1,5 +1,6 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.model";
+import { Purchase } from "./purchase.model";
 
 
 @Entity()
@@ -53,4 +54,7 @@ export class Videogame extends BaseEntity{
     // relations
     @ManyToOne(() => User, (user) => user.videogames)
     user: User;
+
+    // @OneToMany(() => Purchase, (purchase) => purchase.videogame)
+    // purchases: Purchase[];
 }

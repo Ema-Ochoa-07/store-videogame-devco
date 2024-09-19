@@ -1,5 +1,6 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Videogame } from "./videogame.model";
+import { Purchase } from "./purchase.model";
 
 export enum UserStatus{
     ACTIVE = 'ACTIVE',
@@ -40,6 +41,12 @@ export class User extends BaseEntity{
         default: UserStatus.ACTIVE
     })
     status: UserStatus
+
+    @Column({
+        type: 'int',
+        default: 0
+      })
+      quantity: number;
     
 
     @CreateDateColumn()
@@ -52,4 +59,7 @@ export class User extends BaseEntity{
     // relations
     @OneToMany(() => Videogame, (videogame) => videogame.user)
     videogames: Videogame[];
+
+    // @OneToMany(() => Purchase, (purchase) => purchase.user)
+    // purchases: Purchase[];
 }

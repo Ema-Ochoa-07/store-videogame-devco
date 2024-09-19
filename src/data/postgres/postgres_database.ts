@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from './models/user.model';
 import { Videogame } from './models/videogame.model';
+import { Purchase } from './models/purchase.model';
 
 
 
@@ -24,7 +25,7 @@ export class PostgresDatabase {
       username: options.username,
       password: options.password,
       database: options.database,
-      entities: [User, Videogame],
+      entities: [User, Videogame, Purchase],
       synchronize: true,
     })
   }
