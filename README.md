@@ -7,7 +7,7 @@ Proyecto tipo Backend que tiene como objetivo en la creación de un sistema de t
 - Lenguaje de programación: **Java Script - Type Script**
 - Entorno de tiempo de ejecución: **NodeJs**
 - Famework: **Express**
-- Motor de base de datos: **PostgreSQL**
+- Motor de base de datos: **PostgreSQL**git status
 - ORM: **TypeORM**
 - Test Famework : **Jest**
 
@@ -16,4 +16,18 @@ Proyecto tipo Backend que tiene como objetivo en la creación de un sistema de t
 ####  Configuración inicial
 Una vez clonado el repositorio, en directorio raiz del proyecto abrimos la terminal de preferencia y ejecutamos el siguiente comando:`npm install` esto permitirá descargar las dependencias de NodeJs, instaladas para esta aplicación
 
+                    
+###Variables de entornos
+Se debe crear un archivo en el directorio raiz del proyecto `.env`  con el cual se procede a agregar las variables de entorno, para la conexión de la base de datos, con motor de bd postgreSQL.
 
+```javascript
+PORT = 3000
+DATABASE_HOST = localhost
+DATABASE_PORT = 5432
+DATABASE_USERNAME = postgres -> o tu username de postgreSQL
+DATABASE_PASSWORD = ********* -> clave de postgrest
+DATABASE_DATABASE = nombre_BD
+
+NODE_ENV=development
+
+```
