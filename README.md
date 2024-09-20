@@ -7,7 +7,7 @@ Proyecto tipo Backend que tiene como objetivo en la creación de un sistema de t
 - Lenguaje de programación: **Java Script - Type Script**
 - Entorno de tiempo de ejecución: **NodeJs**
 - Famework: **Express**
-- Motor de base de datos: **PostgreSQL**git status
+- Motor de base de datos: **PostgreSQL**
 - ORM: **TypeORM**
 - Test Famework : **Jest**
 
