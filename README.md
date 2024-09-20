@@ -11,11 +11,6 @@ Proyecto tipo Backend que tiene como objetivo en la creación de un sistema de t
 - ORM: **TypeORM**
 - Test Famework : **Jest**
 
-
-
-####  Configuración inicial
-Una vez clonado el repositorio, en directorio raiz del proyecto abrimos la terminal de preferencia y ejecutamos el siguiente comando:`npm install` esto permitirá descargar las dependencias de NodeJs, instaladas para esta aplicación
-
                     
 ###Variables de entornos
 Se debe crear un archivo en el directorio raiz del proyecto `.env`  con el cual se procede a agregar las variables de entorno, para la conexión de la base de datos, con motor de bd postgreSQL.
@@ -31,6 +26,11 @@ DATABASE_DATABASE = nombre_BD
 NODE_ENV=development
 
 ```
+####  Configuración inicial
+- Una vez clonado el repositorio, en directorio raiz del proyecto abrimos la terminal de preferencia y ejecutamos el siguiente comando:`npm install` esto permitirá descargar las dependencias de NodeJs, instaladas para esta aplicación
+- El comando para correr el proyecto: `npm run dev
+- El comando para correr los test: `npm run test:watch`
+
 
 ####  EndPoints - Postman
 https://documenter.getpostman.com/view/36288876/2sAXqta1g6
