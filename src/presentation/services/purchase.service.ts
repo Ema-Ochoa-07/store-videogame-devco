@@ -71,41 +71,22 @@ export class PurchaseService{
 
 
 
-    //  createInvoice = async (quantity:number, amount: number, userId:number, videogameId:number ) =>{
+     createInvoice = async (quantity:number, amount: number, userId:number, videogameId:number ) =>{
 
-    //     const purchase = new Purchase()
+        const purchase = new Purchase()
 
-    //     purchase.quantity = quantity
-    //     purchase.amount = amount
-    //     purchase.userId = userId
-    //     purchase.videogameId = videogameId
+        purchase.quantity = quantity
+        purchase.amount = amount
+        purchase.userId = userId
+        purchase.videogameId = videogameId
 
-    //     try {
-    //         return await purchase.save()
-    //         // return{
-    //         //     ok:true
-    //         // }
-    //     } catch (error) {
-    //         throw new Error('Ups Error algo salió mal 🧨')
-    //     }
-    //  }
-
-    createInvoice = async (quantity:number, amount: number, userId:number, videogameId:number ) => {
-        const purchase = new Purchase();
-    
-        purchase.quantity = quantity;
-        purchase.amount = amount;
-        purchase.userId = userId;
-        purchase.videogameId = videogameId;
-    
         try {
-            console.log('Creando compra...', purchase); // Verificar datos de la compra
-            return await purchase.save();
+            return await purchase.save()
+
         } catch (error) {
-            console.error('Error al crear la compra:', error); // Mostrar el error
-            throw new Error('Ups Error algo salió mal 🧨');
+            throw new Error('Ups Error algo salió mal 🧨')
         }
-    };
+     }
     
 
 }           
