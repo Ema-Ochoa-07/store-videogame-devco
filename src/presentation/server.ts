@@ -28,4 +28,8 @@ export class Server{
             console.log(`Server is running on port ${this.port}`)
         })
     }
+
+    public close(){
+        this.serverListener?.close()
+    }
 }

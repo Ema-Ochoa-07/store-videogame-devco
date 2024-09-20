@@ -94,10 +94,10 @@ export class UserService{
         user.amount = amount
 
         try {
-            return await user.save()    
-            // return {
-            //     ok: true
-            // }
+            await user.save()    
+            return {
+                ok: true
+            }
         } catch (error) {
             throw new Error('Ups Error algo salió mal 🧨')
         }
@@ -109,10 +109,10 @@ export class UserService{
         user.quantity = quantity
 
         try {
-            return await user.save()    
-            // return {
-            //     ok: true
-            // }
+            await user.save()    
+            return {
+                ok: true
+            }
         } catch (error) {
             throw new Error('Ups Error algo salió mal 🧨')
         }

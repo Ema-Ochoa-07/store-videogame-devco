@@ -49,21 +49,23 @@ export class VideogameService{
         }
     }
 
-    async updateVideogames(videogameData: any, id: number){
 
-        const videogame = await this.findOneVideogame(id)
-
-        videogame.name = videogameData.name.toLowerCase().trim()
-        videogame.console = videogameData.console.toLowerCase().trim()
-        videogame.quantity = videogameData.quantity
-        videogame.cost = videogameData.cost  
-
+    async updateVideogames(videogameData: any, id: number) {
         try {
-            return videogame.save()
+            const videogame = await this.findOneVideogame(id);
+                
+            videogame.name = videogameData.name ? videogameData.name.toLowerCase().trim() : videogame.name;
+            videogame.console = videogameData.console ? videogameData.console.toLowerCase().trim() : videogame.console;
+            videogame.quantity = videogameData.quantity !== undefined ? videogameData.quantity : videogame.quantity;
+            videogame.cost = videogameData.cost !== undefined ? videogameData.cost : videogame.cost;
+    
+            return await videogame.save();
         } catch (error) {
-            throw new Error("Ups Error algo salió mal 🧨")
+            throw new Error("Error al actualizar el videojuego");
         }
     }
+    
+
 
     async deleteVideogame(id: number){
 
@@ -86,10 +88,10 @@ export class VideogameService{
         videogame.amount = amount
 
         try {
-            return await videogame.save()    
-            // return {
-            //     ok: true
-            // }
+            await videogame.save()    
+            return {
+                ok: true
+            }
         } catch (error) {
             throw new Error('Ups Error algo salió mal 🧨')
         }
@@ -101,10 +103,10 @@ export class VideogameService{
         videogame.quantity = quantity
 
         try {
-            return await videogame.save()    
-            // return {
-            //     ok: true
-            // }
+            await videogame.save()    
+            return {
+                ok: true
+            }
         } catch (error) {
             throw new Error('Ups Error algo salió mal 🧨')
         }

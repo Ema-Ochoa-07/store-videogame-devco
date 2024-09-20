@@ -11,6 +11,7 @@ describe('Should call server with arguments and start', () => {
         await main()
         
         expect(Server).toHaveBeenCalled()
+        expect(Server.prototype.start).toHaveBeenCalled();
     })
 
 

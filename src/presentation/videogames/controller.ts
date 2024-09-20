@@ -44,22 +44,41 @@ export class VideogamesController{
    }
 
 
-   updateVideogames = (req: Request, res: Response) => {
-    const {id} = req.params
-    const {name, console, quantity, cost} = req.body
+//    updateVideogames = (req: Request, res: Response) => {
+//     const {id} = req.params
+//     const {name, console, quantity, cost} = req.body
 
-    if(isNaN(+id)){
-        return res.status(400).json({message:'El id debe ser un número'})
+//     if(isNaN(+id)){
+//         return res.status(400).json({message:'El id debe ser un número'})
+//     }
+
+//     this.videogameService.updateVideogames({name, console, quantity, cost}, +id)
+//     .then(videogame => {
+//         return res.status(200).json(videogame)
+//     })
+//     .catch(error => {
+//         return res.status(500).json(error)
+//     })
+//    }
+
+updateVideogames = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name, console, quantity, cost } = req.body;
+
+    if (isNaN(+id)) {
+        return res.status(400).json({ message: 'El id debe ser un número' });
     }
 
-    this.videogameService.updateVideogames({name, console, quantity, cost}, +id)
-    .then(videogame => {
-        return res.status(200).json(videogame)
-    })
-    .catch(error => {
-        return res.status(500).json(error)
-    })
-   }
+    this.videogameService.updateVideogames({ name, console, quantity, cost }, +id)
+        .then(videogame => {
+            return res.status(200).json(videogame);
+        })
+        .catch(error => {
+            console.error("Error en updateVideogames:", error); // Agregar log para depuración
+            return res.status(500).json({ message: "Error al actualizar el videojuego", error: error.message });
+        });
+}
+
 
 
    deleteVideogames = (req: Request, res: Response) => {
