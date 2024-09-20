@@ -31,3 +31,6 @@ DATABASE_DATABASE = nombre_BD
 NODE_ENV=development
 
 ```
+
+####  EndPoints - Postman
+https://documenter.getpostman.com/view/36288876/2sAXqta1g6
