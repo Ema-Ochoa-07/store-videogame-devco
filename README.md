@@ -28,7 +28,7 @@ NODE_ENV=development
 ```
 ####  Configuración inicial
 - Una vez clonado el repositorio, en directorio raiz del proyecto abrimos la terminal de preferencia y ejecutamos el siguiente comando:`npm install` esto permitirá descargar las dependencias de NodeJs, instaladas para esta aplicación
-- El comando para correr el proyecto: `npm run dev
+- El comando para correr el proyecto: `npm run dev`
 - El comando para correr los test: `npm run test:watch`
 
 
