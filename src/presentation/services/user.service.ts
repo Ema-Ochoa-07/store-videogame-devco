@@ -25,6 +25,7 @@ export class UserService{
 
 
     async findOneUser(id:number){
+               
         const user = await User.findOne({
             
             where:{
@@ -39,7 +40,7 @@ export class UserService{
             relations:['videogames']
         })
             
-        if(!user) throw Error('Usuario no encontrado')
+        if(!user) throw new Error('Usuario no encontrado')
         return user
     }
 
