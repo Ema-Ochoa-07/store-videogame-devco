@@ -32,5 +32,8 @@ NODE_ENV=development
 - El comando para correr los test: `npm run test:watch`
 
 
+####  Documentación - Swagger 3.0.0
+http://localhost:3000/api/v1/docs
+
 ####  EndPoints - Postman
 https://documenter.getpostman.com/view/36288876/2sAXqta1g6
