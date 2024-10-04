@@ -246,7 +246,6 @@ export class AppRoutes {
 /**************VIDEOGAME **********/
 
 
-
 //*** GET ALL VIDEOGAMES ***
     /**
      * @swagger
@@ -279,7 +278,7 @@ export class AppRoutes {
      *                 cost:
      *                   type: number
      *                   format: float
-     *                   example: 59.99
+     *                   example: 60000
      *                 userId:
      *                   type: integer
      *                   example: 2
@@ -328,7 +327,7 @@ export class AppRoutes {
      *                 cost:
      *                   type: number
      *                   format: float
-     *                   example: 59.99
+     *                   example: 60000
      *                 userId:
      *                   type: integer
      *                   example: 2
@@ -366,7 +365,7 @@ export class AppRoutes {
      *               cost:
      *                 type: number
      *                 format: float
-     *                 example: 59.99
+     *                 example: 70000
      *               userId:
      *                 type: integer
      *                 example: 1
@@ -399,7 +398,7 @@ export class AppRoutes {
      *                 cost:
      *                   type: number
      *                   format: float
-     *                   example: 59.99
+     *                   example: 70000
      *                 userId:
      *                   type: integer
      *                   example: 1
@@ -444,7 +443,7 @@ export class AppRoutes {
      *               cost:
      *                 type: number
      *                 format: float
-     *                 example: 49.99
+     *                 example: 70000
      *               userId:
      *                 type: integer
      *                 example: 1
@@ -507,6 +506,71 @@ export class AppRoutes {
      *       500:
      *         description: Internal server error
      */
+
+
+/************** PURCHASE  **********/
+//*** CREATE PURCHASE ***
+/**
+ * @swagger
+ * /api/v1/purchases:
+ *   post:
+ *     summary: Create a purchase
+ *     description: Add a new purchase to the database.
+ *     tags:
+ *       - Purchases
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               quantity:
+ *                 type: integer
+ *                 example: 1
+ *               amount:
+ *                 type: integer
+ *                 example: 10000
+ *               userId:
+ *                 type: integer
+ *                 example: 1
+ *               videogameId:
+ *                 type: integer
+ *                 example: 2
+ *             required:
+ *               - quantity
+ *               - amount
+ *               - userId
+ *               - videogameId
+ *     responses:
+ *       201:
+ *         description: Purchase created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 quantity:
+ *                   type: integer
+ *                   example: 2
+ *                 amount:
+ *                   type: integer
+ *                   example: 140000
+ *                 userId:
+ *                   type: integer
+ *                   example: 1
+ *                 videogameId:
+ *                   type: integer
+ *                   example: 5
+ *       400:
+ *         description: Invalid input
+ *       500:
+ *         description: Internal server error
+ */
+
 
 
     const router = Router();
@@ -672,6 +736,58 @@ export class AppRoutes {
             videogames.splice(videogameIndex, 1);
             res.status(204).send();
           });
+
+
+      //*** CREATE PURCHASE ***
+
+    const usersPurchase = [
+      { id: 1, name: "Belén", lastname: "Ochoa", amount: 300000 },
+      { id: 2, name: "Andrés", lastname: "Charcopa", amount: 150000 },
+    ];
+
+    const videogamesPurchase = [
+      { id: 1, name: "The Legend of Zelda", console: "Nintendo Switch", quantity: 10, cost: 50000, userId: 2 },
+      { id: 2, name: "Super Mario Odyssey", console: "Nintendo Switch", quantity: 15, cost: 75000, userId: 1 },
+    ];
+
+    // Variable para seguir el último ID de compra
+    let lastPurchaseId = 0;
+
+    // Crear una compra
+    router.post('/purchases', (req: Request, res: Response) => {
+      const { quantity, amount, userId, videogameId } = req.body;
+
+      // Verificar si el usuario existe
+      const user = users.find(u => u.id === userId);
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      // Verificar si el videojuego existe
+      const videogame = videogames.find(vg => vg.id === videogameId);
+      if (!videogame) {
+        return res.status(404).json({ error: 'Videogame not found' });
+      }
+
+      // Verificar si hay suficiente cantidad del videojuego
+      if (videogame.quantity < quantity) {
+        return res.status(400).json({ error: 'Not enough quantity available' });
+      }
+
+      // Guarda la compra con id consecutivo
+      lastPurchaseId += 1; 
+      const newPurchase = {
+        id: lastPurchaseId,
+        quantity,
+        amount,
+        userId,
+        videogameId,
+      };
+
+      res.status(201).json(newPurchase);
+    });
+
+
 
     router.use('/api/v1/users', UsersRoutes.routes);
     router.use('/api/v1/videogames', VidegamesRoutes.routes);
